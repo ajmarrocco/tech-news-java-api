@@ -2,8 +2,7 @@ package com.technews.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 // marks Post class as persistable object so it can map to a table
@@ -15,10 +14,18 @@ import java.io.Serializable;
 @Table(name = "post")
 
 public class Post implements Serializable {
+    // will be unique identifier
+    @Id
+    // will be a generated value
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String title;
     private String posturl;
+    // This data will NOT be persisted in database
+    @Transient
     private String username;
+    // This data will NOT be persisted in database
+    @Transient
     private int voteCount;
     private Integer userId;
     private Date postedAt = new Date();
