@@ -1,9 +1,11 @@
 package com.technews.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+import java.util.Date;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 // marks Post class as persistable object so it can map to a table
 @Entity
@@ -28,7 +30,21 @@ public class Post implements Serializable {
     @Transient
     private int voteCount;
     private Integer userId;
+    // must contain a value
+    @NotNull
+    // Allows for use of Date data type
+    // signals to the JPA that these fields will house data
+    @Temporal(TemporalType.DATE)
+    // designates name of column in database
+    @Column(name = "posted_at")
     private Date postedAt = new Date();
+    // must contain a value
+    @NotNull
+    // Allows for use of Date data type
+    // signals to the JPA that these fields will house data
+    @Temporal(TemporalType.DATE)
+    // designates name of column in database
+    @Column(name = "updated_at")
     private Date updatedAt = new Date();
     private List<Comment> comments;
 
