@@ -2,8 +2,8 @@ package com.technews.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 import javax.xml.stream.events.Comment;
 import java.util.List;
 
@@ -15,6 +15,10 @@ import java.util.List;
 // specifies name of table the class maps too
 @Table(name = "user")
 public class User {
+    // will be unique identifier
+    @Id
+    // will be a generated value
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String username;
     private String email;
