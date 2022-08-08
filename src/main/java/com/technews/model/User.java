@@ -2,7 +2,6 @@ package com.technews.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import javax.xml.stream.events.Comment;
 import java.util.List;
@@ -21,8 +20,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String username;
+    // value must be unique
+    @Column(unique = true)
     private String email;
     private String password;
+    // This data will NOT be persisted in database
+    @Transient
     boolean loggedIn;
 
     private List<Post> posts;
