@@ -67,4 +67,13 @@ public class Vote implements Serializable {
     public int hashCode() {
         return Objects.hash(getId(), getUserId(), getPostId());
     }
+
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", postId=" + postId +
+                '}';
+    }
 }
