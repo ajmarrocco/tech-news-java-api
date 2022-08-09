@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 // marks Vote class as persistable object so it can map to a table
 @Entity
@@ -52,5 +53,18 @@ public class Vote implements Serializable {
 
     public void setPostId(Integer postId) {
         this.postId = postId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vote vote = (Vote) o;
+        return Objects.equals(getId(), vote.getId()) && Objects.equals(getUserId(), vote.getUserId()) && Objects.equals(getPostId(), vote.getPostId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getUserId(), getPostId());
     }
 }
