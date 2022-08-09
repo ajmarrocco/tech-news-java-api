@@ -64,6 +64,15 @@ public class Comment implements Serializable {
         this.postId = postId;
     }
 
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", commentText='" + commentText + '\'' +
+                ", userId=" + userId +
+                ", postId=" + postId +
+                '}';
+    }
 }
 
 
