@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
-//import javax.xml.stream.events.Comment;
 import java.util.List;
 import java.util.Objects;
 
