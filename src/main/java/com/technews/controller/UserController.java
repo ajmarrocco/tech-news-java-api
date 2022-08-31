@@ -48,6 +48,9 @@ public class UserController {
     }
 
     @PostMapping("/api/users")
+    // @RequestBody annotation, maps body of request into transfer object
+    // Deserializes body (bytestream) onto a Java object
+    // similar to req.body in JS
     public User addUser(@RequestBody User user) {
         // Encrypt password
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
@@ -57,8 +60,11 @@ public class UserController {
 
 
     @PutMapping("/api/users/{id}")
+    // @PathVariable allows to enter the int id into request URI as parameter
+    // replacing the /{id}
+    // similar to id: req.params.id in JS
     public User updateUser(@PathVariable int id, @RequestBody User user) {
-        User tempUser = repository.getById(id);
+        User tempUser = repository.getReferenceById(id);
         if (!tempUser.equals(null)) {
             user.setId(tempUser.getId());
             repository.save(user);
@@ -67,7 +73,13 @@ public class UserController {
     }
 
     @DeleteMapping("/api/users/{id}")
+    // Sets status code of HTTP response
+    // NO_CONTENT yields 204 message which means
+    // server has successfully fulfilled the request
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    // @PathVariable allows to enter the int id into request URI as parameter
+    // replacing the /{id}
+    // similar to id: req.params.id in JS
     public void deleteUser(@PathVariable int id) {
         repository.deleteById(id);
     }
