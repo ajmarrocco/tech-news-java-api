@@ -21,10 +21,13 @@ public class UserController {
 
     @GetMapping("/api/users")
     public List<User> getAllUsers() {
+        // calls inherited findAll() method and assigns to list variable
         List<User> userList = repository.findAll();
         for (User u : userList) {
+            // Get all the different users' posts
             List<Post> postList = u.getPosts();
             for (Post p : postList) {
+                // Gets all the posts by post Id number and gives each post a number
                 p.setVoteCount(voteRepository.countVotesByPostId(p.getId()));
             }
         }
@@ -33,9 +36,12 @@ public class UserController {
 
     @GetMapping("/api/users/{id}")
     public User getUserById(@PathVariable Integer id) {
-        User returnUser = repository.getById(id);
+        // Use getReferenceById instead of getById because it is deprecated
+        User returnUser = repository.getReferenceById(id);
+        // Gets all posts from one user
         List<Post> postList = returnUser.getPosts();
         for (Post p : postList) {
+            // Gets all the posts by post Id number and gives each post a number
             p.setVoteCount(voteRepository.countVotesByPostId(p.getId()));
         }
         return returnUser;
