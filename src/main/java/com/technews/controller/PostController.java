@@ -61,13 +61,25 @@ public class PostController {
 
 
     @PutMapping("/api/posts/upvote")
+    // HttpServletRequest provides request information for HTTP servlets
+    // HTTP servlet a special type of servlet that handles an HTTP request
+    // and provides an HTTP response, usually in the form of an HTML page.
+
+    // @RequestBody annotation, maps body of request into transfer object
+    // Deserializes body (bytestream) onto a Java object
+    // similar to req.body in JS
     public String addVote(@RequestBody Vote vote, HttpServletRequest request) {
         String returnValue = "";
-
+        // getSession(false) retrieves current session
+        // If it does not exist, return null
+        // If getSession(false) does not equal null, then session exists
         if(request.getSession(false) != null) {
             Post returnPost = null;
-
+            // Gets user object from the session
+            // getAttribute() fetches data from database
             User sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
+            // sessionUser.getId() gets the id from the User in session
+            // It then uses that id number to set the User id for the vote
             vote.setUserId(sessionUser.getId());
             voteRepository.save(vote);
 
