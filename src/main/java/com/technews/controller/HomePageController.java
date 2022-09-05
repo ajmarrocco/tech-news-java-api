@@ -30,6 +30,7 @@ public class HomePageController {
     @GetMapping("/login")
     public String login(Model model, HttpServletRequest request){
         if(request.getSession(false) != null) {
+            // redirects to the homepage
             return "redirect:/";
         }
         // sends information to the Thymeleaf template
@@ -37,6 +38,16 @@ public class HomePageController {
         model.addAttribute("user", new User());
         return "login";
 
+    }
+
+    @GetMapping("/users/logout")
+    public String logout(HttpServletRequest request){
+        if(request.getSession(false)!=null){
+            // if session exists, we invalidate session which logouts out user
+            request.getSession().invalidate();
+        }
+        // redirects to login page
+        return "redirect:/login";
     }
 
 }
